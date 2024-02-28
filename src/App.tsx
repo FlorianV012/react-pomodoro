@@ -3,6 +3,7 @@ import "./App.scss";
 import { ITask } from "./interfaces";
 import Pomodoro from "./components/Pomodoro";
 import Tasks from "./components/Tasks";
+import NewTask from "./components/NewTask";
 
 function App() {
   const [tasks, setTasks] = useState<ITask[]>([
@@ -18,6 +19,7 @@ function App() {
       <div className="dashboard-container">
         <div className="left">
           <Tasks tasks={tasks} setTasks={setTasks} />
+          <NewTask tasks={tasks} setTasks={setTasks} />
         </div>
         <div className="right">
           <Pomodoro tasks={tasks} setTasks={setTasks} />
