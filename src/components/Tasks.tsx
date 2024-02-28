@@ -15,6 +15,17 @@ export default function Tasks({ tasks, setTasks }: ITasksProps) {
     setTasks(copyTasks);
   }
 
+  function taskInProgress(key: number) {
+    const copyTasks = [...tasks];
+    copyTasks[key].inProgress = !copyTasks[key].inProgress;
+    copyTasks.forEach((task) => {
+      if (task.content !== tasks[key].content && task.inProgress) {
+        task.inProgress = false;
+      }
+    });
+    setTasks(copyTasks);
+  }
+
   function handleDelete(key: number) {
     setTasks(tasks.filter((task) => task.id !== tasks[key].id));
   }
@@ -38,7 +49,9 @@ export default function Tasks({ tasks, setTasks }: ITasksProps) {
               </div>
 
               <div>
-                {!task.done && <button>Do now</button>}
+                {!task.done && (
+                  <button onClick={() => taskInProgress(index)}>Do now</button>
+                )}
                 <button onClick={() => handleDelete(index)}>X</button>
               </div>
             </li>

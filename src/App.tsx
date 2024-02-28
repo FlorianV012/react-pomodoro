@@ -20,7 +20,7 @@ function App() {
           <Tasks tasks={tasks} setTasks={setTasks} />
         </div>
         <div className="right">
-          <Pomodoro />
+          <Pomodoro tasks={tasks} setTasks={setTasks} />
         </div>
       </div>
     </>
