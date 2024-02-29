@@ -40,19 +40,28 @@ export default function Tasks({ tasks, setTasks }: ITasksProps) {
               <div>
                 <input
                   type="checkbox"
-                  name=""
                   id={task.id.toString()}
                   checked={task.done}
                   onChange={() => taskIsDone(index)}
                 />
-                <label htmlFor="">{task.content}</label>
+                <label htmlFor={task.id.toString()}>{task.content}</label>
               </div>
 
               <div>
                 {!task.done && (
-                  <button onClick={() => taskInProgress(index)}>Do now</button>
+                  <button
+                    className="small info"
+                    onClick={() => taskInProgress(index)}
+                  >
+                    Do now
+                  </button>
                 )}
-                <button onClick={() => handleDelete(index)}>X</button>
+                <button
+                  className="small alert"
+                  onClick={() => handleDelete(index)}
+                >
+                  X
+                </button>
               </div>
             </li>
           ))}

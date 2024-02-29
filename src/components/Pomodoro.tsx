@@ -74,6 +74,7 @@ export default function Pomodoro({ tasks, setTasks }: IPomodoroProps) {
 
       <div>
         <button
+          className={currentTask === null ? "secondary" : "info"}
           disabled={currentTask === null ? true : false}
           onClick={() => setDone(currentTask!)}
         >
@@ -82,7 +83,11 @@ export default function Pomodoro({ tasks, setTasks }: IPomodoroProps) {
             🚀
           </span>
         </button>
-        <button onClick={timer} disabled={timerOn || currentTask === null}>
+        <button
+          className="alert"
+          onClick={timer}
+          disabled={timerOn || currentTask === null}
+        >
           Start 25' timer
         </button>
       </div>
