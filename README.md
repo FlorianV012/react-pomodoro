@@ -1,7 +1,7 @@
 # Pomodoro
 
 This application was made with React + TypeScript + Vite.
-
+It's a refactoring of an app created during the Matrice bootcamp, I added TS and removed bootstrap.
 
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
