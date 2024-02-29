@@ -76,47 +76,24 @@ input[type="text"] {
   font-size: inherit;
 }
 
-/*
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+.progress-container {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+  p {
+    font-weight: bold;
+    margin-right: 0.5rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .progress-bar {
+    height: 24px;
+    width: 100%;
+    background: lightgray;
+  }
+
+  .progress-bar .progress-level {
+    height: 100%;
+    background: #17a2b8;
   }
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-*/

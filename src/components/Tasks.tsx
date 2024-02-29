@@ -1,48 +1,23 @@
-import { ITask } from "../interfaces";
-
-interface ITasksProps {
-  tasks: ITask[];
-  setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
-}
-
-export default function Tasks({ tasks, setTasks }: ITasksProps) {
-  function taskIsDone(key: number) {
-    const copyTasks = [...tasks];
-    copyTasks[key].done = !copyTasks[key].done;
-    if (copyTasks[key].inProgress) {
-      copyTasks[key].inProgress = false;
-    }
-    setTasks(copyTasks);
-  }
-
-  function taskInProgress(key: number) {
-    const copyTasks = [...tasks];
-    copyTasks[key].inProgress = !copyTasks[key].inProgress;
-    copyTasks.forEach((task) => {
-      if (task.content !== tasks[key].content && task.inProgress) {
-        task.inProgress = false;
-      }
-    });
-    setTasks(copyTasks);
-  }
-
-  function handleDelete(key: number) {
-    setTasks(tasks.filter((task) => task.id !== tasks[key].id));
-  }
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store";
+import { taskIsDone, taskInProgress, deleteTask } from "../features/tasks";
+export default function Tasks() {
+  const tasks = useSelector((state: RootState) => state.tasks.tasks);
+  const dispatch = useDispatch();
 
   return (
     <>
       <h2>My tasks</h2>
       <ul>
         {tasks &&
-          tasks.map((task, index) => (
+          tasks.map((task, index: number) => (
             <li key={index} className="task-container">
               <div>
                 <input
                   type="checkbox"
                   id={task.id.toString()}
                   checked={task.done}
-                  onChange={() => taskIsDone(index)}
+                  onChange={() => dispatch(taskIsDone(task))}
                 />
                 <label htmlFor={task.id.toString()}>{task.content}</label>
               </div>
@@ -51,14 +26,14 @@ export default function Tasks({ tasks, setTasks }: ITasksProps) {
                 {!task.done && (
                   <button
                     className="small info"
-                    onClick={() => taskInProgress(index)}
+                    onClick={() => dispatch(taskInProgress(task))}
                   >
                     Do now
                   </button>
                 )}
                 <button
                   className="small alert"
-                  onClick={() => handleDelete(index)}
+                  onClick={() => dispatch(deleteTask(task))}
                 >
                   X
                 </button>

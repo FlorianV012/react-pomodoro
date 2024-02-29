@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store";
+import { taskIsDone, taskInProgress } from "../features/tasks";
 import { ITask } from "../interfaces";
-
-interface IPomodoroProps {
-  tasks: ITask[];
-  setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
-}
 
 const timerDuration = 15;
 
-export default function Pomodoro({ tasks, setTasks }: IPomodoroProps) {
+export default function Pomodoro() {
+  const tasks = useSelector((state: RootState) => state.tasks.tasks);
+  const dispatch = useDispatch();
+
   const [currentTask, setCurrentTask] = useState<ITask | null>(null);
   const [time, setTime] = useState<number>(1500);
   const [timerOn, setTimerOn] = useState<boolean>(false);
@@ -48,18 +49,13 @@ export default function Pomodoro({ tasks, setTasks }: IPomodoroProps) {
     });
   }, [tasks]);
 
-  function setDone(taskDone: ITask) {
-    const copyTasks = [...tasks];
-    copyTasks.forEach((task) => {
-      if (task.id === taskDone.id) {
-        task.inProgress = false;
-        task.done = true;
-        let newTimerOn = false;
-        setTimerOn(newTimerOn);
-        setTime(timerDuration);
-      }
-    });
-    setTasks(copyTasks);
+  function setDone(currentTask: ITask) {
+    dispatch(taskIsDone(currentTask));
+    dispatch(taskInProgress(currentTask));
+
+    let newTimerOn = false;
+    setTimerOn(newTimerOn);
+    setTime(timerDuration);
   }
 
   return (

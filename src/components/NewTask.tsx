@@ -1,23 +1,26 @@
 import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { addNewTask } from "../features/tasks";
 import { ITask } from "../interfaces";
 
-interface INewTaskProps {
-  tasks: ITask[];
-  setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
-}
-
-export default function NewTask({ tasks, setTasks }: INewTaskProps) {
+export default function NewTask() {
   const inputRef = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const inputValue = inputRef.current?.value.trim();
     if (!inputValue) return;
     const id = Date.now();
-    setTasks([
-      ...tasks,
-      { content: inputValue, done: false, inProgress: false, id },
-    ]);
+
+    const newTask: ITask = {
+      id,
+      content: inputValue,
+      done: false,
+      inProgress: false,
+    };
+    dispatch(addNewTask(newTask));
+
     inputRef.current!.value = "";
   }
 
