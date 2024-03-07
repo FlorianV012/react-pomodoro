@@ -8,7 +8,7 @@ export default function Tasks() {
   return (
     <>
       <h2>My tasks</h2>
-      <ul>
+      <ul className="tasks-list">
         {tasks &&
           tasks.map((task, index: number) => (
             <li key={index} className="task-container">
