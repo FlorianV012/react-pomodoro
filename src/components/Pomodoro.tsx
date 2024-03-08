@@ -4,7 +4,7 @@ import { RootState } from "../store";
 import { taskIsDone, taskInProgress } from "../features/tasks";
 import { ITask } from "../interfaces";
 
-const timerDuration = 15;
+const timerDuration = 1500;
 
 export default function Pomodoro() {
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
@@ -62,7 +62,7 @@ export default function Pomodoro() {
     <>
       <h2>Pomodoro</h2>
 
-      <p>
+      <p className="task-content">
         {currentTask === null
           ? "Not currently doing anything"
           : currentTask.content}

@@ -81,6 +81,14 @@ body {
     &.dark-mode {
       @include theme($dark-background, $white);
     }
+
+    h2 {
+      margin-bottom: 30px;
+    }
+
+    .task-content {
+      margin-bottom: 10px;
+    }
   }
 }
 
